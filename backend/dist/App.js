@@ -10,6 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoose_1 = __importDefault(require("mongoose"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const auth_route_1 = __importDefault(require("./routes/auth_route"));
 const init = () => {
     const promise = new Promise((resolve) => {
         const db = mongoose_1.default.connection;
@@ -23,6 +24,7 @@ const init = () => {
             app.use(body_parser_1.default.urlencoded({ extended: true }));
             app.use(body_parser_1.default.json());
             app.use((0, cors_1.default)());
+            app.use("/auth", auth_route_1.default);
             resolve(app);
         });
     });

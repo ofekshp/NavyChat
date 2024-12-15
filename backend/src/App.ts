@@ -6,6 +6,7 @@ env.config();
 
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import authRoute from "./routes/auth_route";
 
 const init = () => {
   const promise = new Promise<Express>((resolve) => {
@@ -20,6 +21,9 @@ const init = () => {
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
       app.use(cors());
+
+      app.use("/auth", authRoute);
+
       resolve(app);
     });
   });
