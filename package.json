@@ -1,0 +1,19 @@
+{
+    "name": "project-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "install:frontend": "cd frontend && npm install",
+        "install:backend": "cd backend && npm install",
+        "start:frontend": "cd frontend && npm run dev",
+        "start:backend": "cd backend && npm run dev",
+        "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+        "install": "npm run install:frontend && npm run install:backend"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.0"
+    },
+    "dependencies": {
+        "cors": "^2.8.5"
+    }
+}

@@ -60,4 +60,22 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(400).json({ message: 'Error in login' });
     }
 });
-exports.default = { register, login };
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { username } = req.body;
+    try {
+        const user = yield auth_model_1.default.findOne({ username: username });
+        if (!user) {
+            return res.status(404).json({ message: 'User do not exist' });
+        }
+        const profileUser = { username: user.username, email: user.email };
+        return res.status(200).json({
+            message: 'GetUser successful',
+            profileUser
+        });
+    }
+    catch (err) {
+        console.error('Error in getUser:', err);
+        return res.status(500).json({ message: 'Error in getting user' });
+    }
+});
+exports.default = { register, login, getUser };

@@ -16,4 +16,8 @@ router.post('/login', (req, res) => {
     console.log('Received POST request to /login');
     auth_controller_1.default.login(req, res);
 });
+router.post('/search', (req, res) => {
+    console.log('Received GET request to /search');
+    auth_controller_1.default.getUser(req, res);
+});
 exports.default = router;

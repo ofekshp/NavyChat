@@ -1,5 +1,6 @@
 import { Request, Response , NextFunction} from "express";
 import User from "../models/auth_model";
+import IProfileUser from "../models/auth_model";
 import bcrypt from "bcrypt";
 
 // User registration
@@ -50,4 +51,22 @@ const register = async (req: Request, res: Response ) => {
         }
     };
 
-export default { register, login };
+    const getUser = async (req: Request, res: Response) => {
+      const { username } = req.body;
+      try {
+          const user = await User.findOne({username: username});
+          if(!user){
+              return res.status(404).json({ message: 'User do not exist' });
+          }
+          const profileUser = { username: user.username, email: user.email };
+          return res.status(200).json({ 
+              message: 'GetUser successful', 
+              profileUser 
+          });
+      } catch(err) {
+          console.error('Error in getUser:', err);
+          return res.status(500).json({ message: 'Error in getting user' });
+      }
+  };
+    
+export default { register, login , getUser};

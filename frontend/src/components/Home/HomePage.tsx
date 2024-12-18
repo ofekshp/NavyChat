@@ -13,6 +13,9 @@ function HomePage() {
       <div className="button-container">
         <button className="profileBTN myButton" onClick={() => navigate('/Profile')}>Profile</button>
       </div>
+      <div className="button-container">
+        <button className="searchBTN myButton" onClick={() => navigate('/Search')}>Search</button>
+      </div>
       <div>
         {isLoading && <div className="spinner-border text-primary" />}
         {error && <div className="alert alert-danger">{error}</div>}

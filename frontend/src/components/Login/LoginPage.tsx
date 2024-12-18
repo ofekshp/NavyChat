@@ -26,18 +26,15 @@ function LoginPage() {
 
   const onSubmit = async (data: IloginUser) => {
     const userService:UserService = new UserService();
-    await userService.loginUser(data)
-      .then(() => {
-        setIsLoading(false);
-        console.log("login success");
-        navigate('/Home');
-      })
-      .catch((error: any) => {
-        if (error instanceof CanceledError) return;
-        console.log(error);
-        setError("Wrong credentials, please try again.");
-        setIsLoading(false);
-      });
+    const response = await userService.loginUser(data);
+    if (response) {
+      console.log("Login successful");
+      navigate('/Home');
+    }
+    else {
+      console.log("Login failed");
+      setError("Email or password is incorrect");
+    }
 
   };
 

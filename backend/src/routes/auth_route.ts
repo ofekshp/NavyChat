@@ -14,4 +14,9 @@ router.post('/login', (req, res) => {
     AuthControllers.login(req, res);
   });
 
+  router.post('/search', (req, res) => {
+    console.log('Received GET request to /search');
+    AuthControllers.getUser(req, res);
+  });
+
 export default router;
